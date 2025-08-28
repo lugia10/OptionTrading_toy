@@ -20,5 +20,13 @@ class XASession:
 
     def connect_server(self):
         res = self.session.ConnectServer(self.login_server, 20001)
-        print(res)
+        if res:
+            print("서버 연결 성공")
+        else:
+            error_code = self.GetLastError()
+            error_msg = self.GetErrorMessage(error_code)
+            print(f"서버 연결 실패: {error_msg}")
+        
+    def disconnect_server(self):
+        self.session.DisconnectServer()
         
